@@ -59,25 +59,6 @@ function randomMinMax(min, max) {
 //execute first particle creation afterwards it runs in a loop
 create();
 
-/*
-//LOGIN SECTION:
-function login(){
-    var username = $("#accountNameInput").val();
-    var password = $("#passwordInput").val();
-    $.get("http://localhost/wowcasino/src/phpApi/login.php",{username: username, pass: password}, function(data){
-        var answer = JSON.parse(data);
-        if(answer.code == "200"){
-            $.notify("Logged in","success");
-            document.cookie = username;
-            window.location.href = 'wowcasino.html';
-            return false;
-        } else {
-            $.notify("Error", "warn");
-        }
-    });
-}
-*/
-
 //Make background Divs follow mousecursor
 var box=$("#scene");
 //Set the center of the box in a list
