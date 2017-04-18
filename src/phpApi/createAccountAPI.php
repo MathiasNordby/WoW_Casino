@@ -10,8 +10,9 @@ include("dbConnection.php");
 session_start();
 
 //CREATE ACCOUNT
-// prepare and bind
+//Prepare SQL statement for execution
 $stmt = $conn->prepare("INSERT INTO accounts (username, pass, email) VALUES (?,?,?)");
+//Binds the variables to a prepared statement as parameters ("sss" | s = string | d = double | i = integer | b = blob, send in packets
 $stmt->bind_param("sss", $username, $password, $email);
 
 $username = $_POST['username'] ;
