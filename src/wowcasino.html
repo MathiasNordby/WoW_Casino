@@ -12,32 +12,18 @@
     <link rel="stylesheet" href="css/wowcasino.css">
 </head>
 <body>
-<div id="container">
-    <div class="col-md-2">
-    </div>
-    <nav class="navbar navbar navbar-circle col-xs-12 col-md-8">
-        <span class="navbar-text navbar">Username: </span>
-        <span class="navbar-text navbar">Balance:</span>
-        <span class="navbar-text navbar-right">Next Game:</span>
-        <span class="navbar-text navbar-right">UsernameTest</span>
+<div id="frontParent" class="col-md-offset-2 col-md-8">
+    <nav class="navbar navbar-circle">
+        <div class="navbarText">Username: <span>UsernameTest</span> <span class="navbarTextVisit">Last Time Visit: <span id="lastVisit"> </span></span></div>
+        <div class="navbarText">Balance: <span>BalanceTest</span> <span class="navbarTextVisit">Current Time Visit: <span id="currentVisit"> </span></span></div>
+        <div class="navbarText">Next Game: <span>Next GameTest</span></div>
+        <div class="navbarTextBtn"><button id="logOut" class="btn btn-success btn-lg" type="button" onclick="logOut()">Log Out</button></div>
     </nav>
 
-    <div class="container-fluid text-center">
-        <div class="panel">
-            <div class="col-sm-8 text-left">
-                <h1>Welcome</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                <hr>
-                <h3>Test</h3>
-                <p>Lorem ipsum...</p>
-            </div>
-        </div>
+    <div id="mainContainer">
+
     </div>
 </div>
-
-<footer class="container-fluid text-center">
-    <p>Footer Text</p>
-</footer>
 <!-- Implement JQeury lib -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <!-- Implement Bootstrap lib -->
