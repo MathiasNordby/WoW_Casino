@@ -9,10 +9,22 @@ body{
     margin: 0;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    text-shadow: 2px 2px black;
 }
 
 h1 {
     font-size: 60px;
+    text-shadow: 2px 2px black;
+}
+
+h2 {
+    text-shadow: 2px 2px black;
+}
+
+.line-separator{
+    height:1px;
+    background:#717171;
+    border-bottom:1px solid #313030;
 }
 
 /*
@@ -52,16 +64,6 @@ h1 {
     padding-top: 30px;
 }
 
-.sidebar-nav ul a:hover {
-    display: block;
-    background-color: rgb(38, 255, 38);
-    -moz-transition: all 0.3s ease-in;
-    -o-transition: all 0.3s ease-in;
-    -webkit-transition: all 0.3s ease-in;
-    transition: all 0.3s ease-in;
-}
-
-
 /*
     Page-Container
  */
@@ -71,8 +73,8 @@ h1 {
     margin-top: 30px;
     margin-left: 21%;
     width: 75%;
-    background-image: linear-gradient(to bottom, #419641, #000 100%);
-    border: 2px outset #419641;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px outset white;
 }
 
 .panel-title {

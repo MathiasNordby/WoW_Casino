@@ -34,6 +34,9 @@
 
         <!-- Log in Panel -->
         <div id="loginContainer">
+                <h1>User</h1>
+                <h2>Sign in to get user privileges</h2>
+                <div class="line-separator"></div>
             <form action="phpApi/login.php" method="POST">
                 <h4>Account name:</h4>
                 <input class="form-control input-lg" id="accountNameInput" name="username" type="text" placeholder="Account Name">
@@ -46,15 +49,15 @@
                     <button id="logInButton" type="submit" value="wowcasino.html" class="btn btn-success btn-md">Log in</button>
                 </div>
             </form>
-
-            <div class="col-md-2 text-center">
+            <div class="col-md-2 text-center" style="padding-top: 20px;">
                 <button class="frontBackButton" type="button" class="btn btn-success" onclick="showFrontpage()"><span class="glyphicon glyphicon-arrow-left"></span> Back</button>
             </div>
         </div>
 
         <!-- Create Account Panel -->
         <div id="createAccountContainer">
-
+            <h1>Create Account</h1>
+            <div class="line-separator"></div>
             <form action="phpApi/createAccountAPI.php" method="POST">
                 <h4>Account name:</h4>
                 <input class="form-control input-lg" id="accountName" name="username" type="text" placeholder="Account Name">
@@ -74,8 +77,8 @@
                     <button id="createAccountButton" type="submit" class="btn btn-success btn-md">Create</button>
                 </div>
             </form>
-            <br><br><br><br><br>
-            <div class="col-md-2 text-center">
+            <br><br><br>
+            <div class="col-md-2 text-center" style="padding-bottom: 10px;">
                 <button class="frontBackButton" type="button" class="btn btn-success" onclick="showFrontpage()"><span class="glyphicon glyphicon-arrow-left"></span> Back</button>
             </div>
         </div>

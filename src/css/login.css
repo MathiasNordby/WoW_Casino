@@ -1,11 +1,35 @@
 @import url('https://fonts.googleapis.com/css?family=Homenaje');
 
 body {
-  background-color: #000000;
+  background-image: linear-gradient(to bottom, #ff0, #419641, #000 15%);
+  background-attachment: fixed;
   /*background-image: url("http://sf.co.ua/12/12/wallpaper-2516302.jpg"); */
   background-size: cover;
   background-repeat: no-repeat;
   font-family: 'Homenaje', sans-serif;
+  color: white;
+  text-shadow: 2px 2px black;
+}
+
+h1 {
+  font-size: 60px;
+  text-shadow: 2px 2px black;
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+
+h2 {
+  text-shadow: 2px 2px black;
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+
+.line-separator{
+  height:1px;
+  background:#717171;
+  border-bottom:1px solid #313030;
 }
 
 #scene {
