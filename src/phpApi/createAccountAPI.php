@@ -22,11 +22,13 @@ $email = $_POST['email'];
 //SQL-injection Security
 $username = stripcslashes($username);
 $password = stripcslashes($password);
+$password = stripcslashes($email);
 
 $username = mysqli_real_escape_string($conn, $username);
 $password = mysqli_real_escape_string($conn, $password);
+$password = mysqli_real_escape_string($conn, $email);
 
-if($stmt->execute() > 0 && $username !== "" && $password !== "") {
+if($stmt->execute() > 0 && $username !== "" && $password !== "" && $email !== "") {
     echo "Account succesfully created! ";
 } else {
     echo "Error on creating account! ";
