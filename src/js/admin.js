@@ -6,10 +6,11 @@
 /*
     Execute these functions through a function when HTML.document is fully loaded.
  */
+/*
 document.ready(function() {
 
 });
-
+*/
 /*
     Create account using AJAX passing it to Database
  */
@@ -20,7 +21,7 @@ function createAccount() {
     var accountStatus = $('#accountStatus').val();
     $.ajax({
         type: "POST",
-        url: "database",
+        url: "phpApi/CRUDAPI.php?p=create",
         data: "username="+username+"&pass="+password+"&email="+email+"&accountStatus="+accountStatus,
         success: function(respons) {
             alert('Data is succesfully inserted into Database');

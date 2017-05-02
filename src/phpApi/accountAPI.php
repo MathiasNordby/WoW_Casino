@@ -9,5 +9,12 @@
 //SELECT * ACCOUNTS
 //Prepare SQL statement for execution
 $stmt = $conn->prepare("SELECT * FROM accounts");
-//Binds the variables to a prepared statement as parameters ("sss" | s = string | d = double | i = integer | b = blob, send in packets
-$stmt->bind_param("sss", $username, $password, $email);
+
+if($stmt->execute()) {
+    echo "All accounts loaded ";
+} else {
+    echo "Error on loading all accounts ";
+}
+
+$stmt->close();
+$conn->close();
