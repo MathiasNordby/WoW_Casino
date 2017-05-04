@@ -19,7 +19,7 @@ function createAccount() {
     var password = $('#password').val();
     var email = $('#email').val();
     var accountStatus = $('#accountStatus').val();
-    $.post("http://localhost/Web%20Programming%20-%20Eksamen/WoW_Casino/src/phpApi/createAccount.php",
+    $.post("http://localhost/WoW_Casino/src/phpApi/createAccount.php",
         { username: username, pass: password, email: email, accountStatus: accountStatus}).done(function(data) {
         alert ("Account Created");
         alert (accountStatus);
@@ -30,7 +30,7 @@ function createAccount() {
     read account using AJAX reading the PHP that connects with MySQL-Database
  */
 function readAccount() {
-    $.get("http://localhost/Web%20Programming%20-%20Eksamen/WoW_Casino/src/phpApi/accountAPI.php", function(data) {
+    $.get("http://localhost/WoW_Casino/src/phpApi/accountAPI.php", function(data) {
         $("#readAccount").empty();
         var accountArray = JSON.parse(data);
         console.log(accountArray);

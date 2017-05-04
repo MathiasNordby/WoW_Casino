@@ -7,7 +7,6 @@
  */
 
 include("dbConnection.php");
-session_start();
 
     //CREATE ACCOUNT FROM ADMIN
 //Prepare SQL statement for execution

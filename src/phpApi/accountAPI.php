@@ -7,7 +7,6 @@
  */
 
 include("dbConnection.php");
-session_start();
 
 //SELECT * ACCOUNTS
 //Prepare SQL statement for execution
