@@ -17,7 +17,7 @@ $stmt = $conn->prepare($sql);
 $array = array();
 $i = 0;
 
-if($stmt->execute()) {
+if($stmt->execute() === TRUE) {
     /* Get the result */
     $result = $stmt->get_result();
 

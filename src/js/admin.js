@@ -29,8 +29,9 @@ function createAccount() {
 /*
     read account using AJAX reading the PHP that connects with MySQL-Database
  */
+//Read Account Table
 function readAccount() {
-    $.get("http://localhost/Web%20Programming%20-%20Eksamen/WoW_Casino/src/phpApi/accountAPI.php", function(data) {
+    $.get("http://localhost/Web%20Programming%20-%20Eksamen/WoW_Casino/src/phpApi/accountAPI.php", function (data) {
         $("#readAccount").empty();
         var accountArray = JSON.parse(data);
         console.log(accountArray);
@@ -38,20 +39,58 @@ function readAccount() {
         for (i = 0; i < accountArray.length; i++) {
             var row = "" +
                 "<tr>" +
-                "<td>"+ accountArray[i].data.id +"</td>" +
-                "<td>"+ accountArray[i].data.username +"</td>" +
-                "<td>"+ accountArray[i].data.pass +"</td>" +
-                "<td>"+ accountArray[i].data.email +"</td>" +
-                "<td>"+ accountArray[i].data.balance +"</td>" +
-                "<td>"+ accountArray[i].data.location +"</td>" +
-                "<td>"+ accountArray[i].data.lt_online +"</td>" +
-                "<td>"+ accountArray[i].data.account_status+"</td>" +
+                "<td>" + accountArray[i].data.id + "</td>" +
+                "<td>" + accountArray[i].data.username + "</td>" +
+                "<td>" + accountArray[i].data.pass + "</td>" +
+                "<td>" + accountArray[i].data.email + "</td>" +
+                "<td>" + accountArray[i].data.balance + "</td>" +
+                "<td>" + accountArray[i].data.location + "</td>" +
+                "<td>" + accountArray[i].data.lt_online + "</td>" +
+                "<td>" + accountArray[i].data.account_status + "</td>" +
                 "</tr>"
             $("#readAccount").append(row);
         }
     });
-}
 
+//Update Account Table
+    $.get("http://localhost/Web%20Programming%20-%20Eksamen/WoW_Casino/src/phpApi/accountAPI.php", function (data) {
+        $("#updateAccount").empty();
+        var accountArray = JSON.parse(data);
+        console.log(accountArray);
+
+        for (i = 0; i < accountArray.length; i++) {
+            var row = "" +
+                "<tr>" +
+                "<td>" + accountArray[i].data.id + "</td>" +
+                "<td>" + accountArray[i].data.username + "</td>" +
+                "<td>" + accountArray[i].data.pass + "</td>" +
+                "<td>" + accountArray[i].data.email + "</td>" +
+                "<td>" + accountArray[i].data.account_status + "</td>" +
+                "<td>" + accountArray[i].data.isDeleted + "</td>" +
+                "</tr>"
+            $("#updateAccount").append(row);
+        }
+    });
+
+//Deleted Account Table
+    $.get("http://localhost/Web%20Programming%20-%20Eksamen/WoW_Casino/src/phpApi/accountAPI.php", function (data) {
+        $("#deleteAccount").empty();
+        var accountArray = JSON.parse(data);
+        console.log(accountArray);
+
+        for (i = 0; i < accountArray.length; i++) {
+            var row = "" +
+                "<tr>" +
+                "<td>" + accountArray[i].data.id + "</td>" +
+                "<td>" + accountArray[i].data.username + "</td>" +
+                "<td>" + accountArray[i].data.pass + "</td>" +
+                "<td>" + accountArray[i].data.email + "</td>" +
+                "<td>" + accountArray[i].data.isDeleted + "</td>" +
+                "</tr>"
+            $("#deleteAccount").append(row);
+        }
+    });
+}
 /*
     Update Account using AJAX reading the PHP that connects with MySQL-database
  */
