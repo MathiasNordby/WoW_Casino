@@ -67,13 +67,14 @@ function readAccount() {
                 "<td>" + accountArray[i].data.email + "</td>" +
                 "<td>" + accountArray[i].data.account_status + "</td>" +
                 "<td>" + accountArray[i].data.isDeleted + "</td>" +
+                '<td><button class="btn btn-info" onclick="updateAccount(' + accountArray[i].data.id + ')">Update</button></td>' +
                 "</tr>"
             $("#updateAccount").append(row);
         }
     });
 
 //Deleted Account Table
-    $.get("http://localhost/Web%20Programming%20-%20Eksamen/WoW_Casino/src/phpApi/accountAPI.php", function (data) {
+    $.get("http://localhost/Web%20Programming%20-%20Eksamen/WoW_Casino/src/phpApi/accountAPI_deleted.php", function (data) {
         $("#deleteAccount").empty();
         var accountArray = JSON.parse(data);
         console.log(accountArray);
@@ -85,16 +86,21 @@ function readAccount() {
                 "<td>" + accountArray[i].data.username + "</td>" +
                 "<td>" + accountArray[i].data.pass + "</td>" +
                 "<td>" + accountArray[i].data.email + "</td>" +
-                "<td>" + accountArray[i].data.isDeleted + "</td>" +
+                '<td><button class="btn btn-danger" onclick="undeleteAccount(' + accountArray[i].data.id + ')">Undelete</button></td>' +
                 "</tr>"
             $("#deleteAccount").append(row);
         }
     });
 }
+
 /*
     Update Account using AJAX reading the PHP that connects with MySQL-database
  */
 function updateAccount() {
+
+}
+
+function undeleteAccount() {
 
 }
 

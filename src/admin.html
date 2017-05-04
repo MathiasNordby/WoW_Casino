@@ -31,7 +31,7 @@
             <ul><button class="btn-success" onclick="showCreateAccount()">Create Account</button></ul>
             <ul><button class="btn-success" onclick="showReadAccount()">Read Account</button></ul>
             <ul><button class="btn-success" onclick="showUpdateAccount()">Update Account</button></ul>
-            <ul><button class="btn-success" onclick="showDeleteAccount()">Delete Account</button></ul>
+            <ul><button class="btn-success" onclick="showDeleteAccount()">Deleted Accounts</button></ul>
         </ul>
     </div>
 
@@ -51,7 +51,7 @@
                     <th>Account Status</th>
                     <th></th>
                     </thead>
-                    <tbody id="createAccount">
+                    <tbody id="createAccount" class="pre-scrollable">
                     <td><input id="username" style="color: black"></td>
                     <td><input id="password" style="color: black"></td>
                     <td><input id="email" style="color: black"></td>
@@ -79,7 +79,6 @@
                         <th>Account Status</th>
                     </thead>
                     <tbody id="readAccount">
-
                     </tbody>
                 </table>
             </div>
@@ -98,6 +97,7 @@
                     <th>Email</th>
                     <th>Account Status</th>
                     <th>Is deleted</th>
+                    <th></th>
                     </thead>
                     <tbody id="updateAccount">
 
@@ -117,7 +117,7 @@
                     <th>Username</th>
                     <th>Password</th>
                     <th>Email</th>
-                    <th>Delete</th>
+                    <th></th>
                     </thead>
                     <tbody id="deleteAccount">
 
