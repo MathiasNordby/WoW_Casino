@@ -6,11 +6,11 @@
 /*
     Execute these functions through a function when HTML.document is fully loaded.
  */
-/*
-document.ready(function() {
 
+$(document).ready(function() {
+    readAccount();
 });
-*/
+
 /*
     Create account using AJAX passing it to Database
  */
@@ -19,15 +19,46 @@ function createAccount() {
     var password = $('#password').val();
     var email = $('#email').val();
     var accountStatus = $('#accountStatus').val();
-    $.ajax({
-        type: "POST",
-        url: "phpApi/CRUDAPI.php?p=create",
-        data: "username="+username+"&pass="+password+"&email="+email+"&accountStatus="+accountStatus,
-        success: function(respons) {
-            alert('Data is succesfully inserted into Database');
+    $.post("http://localhost/Web%20Programming%20-%20Eksamen/WoW_Casino/src/phpApi/createAccount.php",
+        { username: username, pass: password, email: email, accountStatus: accountStatus}).done(function(data) {
+        alert ("Account Created");
+        alert (accountStatus);
+    });
+}
+
+/*
+    read account using AJAX reading the PHP that connects with MySQL-Database
+ */
+function readAccount() {
+    $.get("http://localhost/Web%20Programming%20-%20Eksamen/WoW_Casino/src/phpApi/accountAPI.php", function(data) {
+        $("#readAccount").empty();
+        var accountArray = JSON.parse(data);
+        console.log(accountArray);
+
+        for (i = 0; i < accountArray.length; i++) {
+            var row = "" +
+                "<tr>" +
+                "<td>"+ accountArray[i].data.id +"</td>" +
+                "<td>"+ accountArray[i].data.username +"</td>" +
+                "<td>"+ accountArray[i].data.pass +"</td>" +
+                "<td>"+ accountArray[i].data.email +"</td>" +
+                "<td>"+ accountArray[i].data.balance +"</td>" +
+                "<td>"+ accountArray[i].data.location +"</td>" +
+                "<td>"+ accountArray[i].data.lt_online +"</td>" +
+                "<td>"+ accountArray[i].data.account_status+"</td>" +
+                "</tr>"
+            $("#readAccount").append(row);
         }
     });
 }
+
+/*
+    Update Account using AJAX reading the PHP that connects with MySQL-database
+ */
+function updateAccount() {
+
+}
+
 
 /*
     Display each section of C-R-U-D

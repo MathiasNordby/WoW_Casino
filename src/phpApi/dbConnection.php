@@ -1,4 +1,4 @@
-<?php
+    <?php
 /**
  * Created by IntelliJ IDEA.
  * User: Mathias
@@ -15,5 +15,5 @@
     if($conn -> connect_error) {
         die("Connection failed: " . $conn -> connect_error . " |  \n");
     }
-        echo "Connected succesfully to Database |  \n";
+        //echo "Connected succesfully to Database |  \n";
 ?>
