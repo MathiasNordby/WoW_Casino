@@ -19,7 +19,7 @@ function createAccount() {
     var password = $('#password').val();
     var email = $('#email').val();
     var accountStatus = $('#accountStatus').val();
-    $.post("http://localhost/WoW_Casino/src/phpApi/createAccount.php",
+    $.post("phpApi/createAccount.php",
         { username: username, pass: password, email: email, accountStatus: accountStatus}).done(function(data) {
         alert ("Account Created");
         alert (accountStatus);
@@ -31,7 +31,7 @@ function createAccount() {
  */
 //Read Account Table
 function readAccount() {
-        $.get("http://localhost/WoW_Casino/src/phpApi/accountAPI.php", function (data) {
+        $.get("phpApi/accountAPI.php", function (data) {
             $("#readAccount").empty();
             var accountArray = JSON.parse(data);
             console.log(accountArray);
@@ -53,7 +53,7 @@ function readAccount() {
         });
 
 //Update Account Table
-        $.get("http://localhost/WoW_Casino/src/phpApi/accountAPI.php", function (data) {
+        $.get("phpApi/accountAPI.php", function (data) {
             $("#updateAccount").empty();
             var accountArray = JSON.parse(data);
             console.log(accountArray);
@@ -74,7 +74,7 @@ function readAccount() {
         });
 
 //Deleted Account Table
-        $.get("http://localhost/WoW_Casino/src/phpApi/accountAPI_deleted.php", function (data) {
+        $.get("phpApi/accountAPI_deleted.php", function (data) {
             $("#deleteAccount").empty();
             var accountArray = JSON.parse(data);
             console.log(accountArray);
