@@ -12,7 +12,7 @@ include("dbConnection.php");
 $username = $_POST['username'] ;
 $password = $_POST['pass'];
 $email = $_POST['email'];
-$accountStatus = ($_POST['account_status']);
+$accountStatus = intval($_POST['account_status']);
 
 //CREATE ACCOUNT FROM ADMIN
 //Prepare SQL statement for execution
@@ -23,11 +23,9 @@ $accountStatus = ($_POST['account_status']);
 //SQL-injection Security
     $username = stripcslashes($username);
     $password = stripcslashes($password);
-    $email = stripcslashes($email);
 
     $username = mysqli_real_escape_string($conn, $username);
     $password = mysqli_real_escape_string($conn, $password);
-    $email = mysqli_real_escape_string($conn, $email);
 
     //$hash(sha512) + lav egen salt
 

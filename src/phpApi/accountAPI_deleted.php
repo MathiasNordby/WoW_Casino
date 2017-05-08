@@ -10,7 +10,7 @@ include("dbConnection.php");
 
 //SELECT * ACCOUNTS
 //Prepare SQL statement for execution
-$sql = "SELECT * FROM accounts WHERE is_deleted = 0";
+$sql = "SELECT * FROM accounts WHERE is_deleted = 1";
 $stmt = $conn->prepare($sql);
 
 $array = array();

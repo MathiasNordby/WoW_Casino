@@ -19,11 +19,15 @@ function createAccount() {
     var password = $('#password').val();
     var email = $('#email').val();
     var accountStatus = $('#accountStatus').val();
-    $.post("phpApi/createAccount.php",
-        { username: username, pass: password, email: email, accountStatus: accountStatus}).done(function(data) {
-        alert ("Account Created");
-        alert (accountStatus);
-    });
+    if(username.length > 4 && password.length > 4 && email.length > 4) {
+        $.post("phpApi/createAccount.php",
+            { username: username, pass: password, email: email, account_status: accountStatus}).done(function(data) {
+            alert ("Account Created");
+            alert (accountStatus);
+        });
+    } else {
+        alert ("Username, Password and email must be atleast 5 chars each")
+    }
 }
 
 /*
@@ -66,7 +70,7 @@ function readAccount() {
                     "<td>" + accountArray[i].data.pass + "</td>" +
                     "<td>" + accountArray[i].data.email + "</td>" +
                     "<td>" + accountArray[i].data.account_status + "</td>" +
-                    "<td>" + accountArray[i].data.isDeleted + "</td>" +
+                    '<td><button class="btn btn-danger" disabled>Delete</button></td>' +
                     '<td><button class="btn btn-info" onclick="updateAccount(' + accountArray[i].data.id + ')">Update</button></td>' +
                     "</tr>"
                 $("#updateAccount").append(row);
@@ -86,7 +90,7 @@ function readAccount() {
                     "<td>" + accountArray[i].data.username + "</td>" +
                     "<td>" + accountArray[i].data.pass + "</td>" +
                     "<td>" + accountArray[i].data.email + "</td>" +
-                    '<td><button class="btn btn-danger" onclick="undeleteAccount(' + accountArray[i].data.id + ')">Undelete</button></td>' +
+                    '<td><button class="btn btn-danger" onclick="undeleteAccount(' + accountArray[i].data.id + ')">Restore</button></td>' +
                     "</tr>"
                 $("#deleteAccount").append(row);
             }
@@ -100,8 +104,22 @@ function updateAccount() {
 
 }
 
-function undeleteAccount() {
+function deleteAccount(id) {
+    if(confirm("Are you sure you want to delete Account?")) {
+        $.post("phpApi/deleteAccount.php", {id: id}).done(function(data) {
+            alert("deleted account with id: " + id);
+        });
+    }
+    location.reload();
+}
 
+function undeleteAccount(id) {
+    if(confirm("Are you sure you want to restore Account?")) {
+        $.post("phpApi/restoreAccount.php", {id: id}).done(function(data) {
+            alert("Account with id: " + id + " has been restored");
+        });
+    }
+    location.reload();
 }
 
 

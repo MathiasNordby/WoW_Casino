@@ -106,6 +106,7 @@ h2 {
     Button CSS
  */
 
+/* GREEN BUTTON */
 .btn-success {
     width: 100%;
     background-image: linear-gradient(to bottom, #419641, #000 100%);
@@ -126,4 +127,54 @@ h2 {
 
 .btn-success:focus {
     background-position: 0;
+}
+
+/* RED BUTTON */
+.btn-danger {
+    width: 50%;
+    background-image: linear-gradient(to bottom, red, #000 100%);
+    background-color: Transparent;
+    padding-left: 5%;
+    border: none;
+    outline: none;
+}
+
+.btn-danger:hover {
+    -moz-transition: all 0.3s ease-in;
+    -o-transition: all 0.3s ease-in;
+    -webkit-transition: all 0.3s ease-in;
+    transition: all 0.3s ease-in;
+    background: #f5f5f5;
+    background-image: linear-gradient(to bottom, #ff0, #419641 100%);
+}
+
+.btn-danger:focus {
+    background-position: 0;
+    border: none;
+    outline: none;
+}
+
+/* BLUE BUTTON */
+.btn-info {
+    width: 50%;
+    background-image: linear-gradient(to bottom, #01A9DB, #000 100%);
+    background-color: Transparent;
+    padding-left: 5%;
+    border: none;
+    outline: none;
+}
+
+.btn-info:hover {
+    -moz-transition: all 0.3s ease-in;
+    -o-transition: all 0.3s ease-in;
+    -webkit-transition: all 0.3s ease-in;
+    transition: all 0.3s ease-in;
+    background: #f5f5f5;
+    background-image: linear-gradient(to bottom, #ff0, #419641 100%);
+}
+
+.btn-info:focus {
+    background-position: 0;
+    border: none;
+    outline: none;
 }
