@@ -8,17 +8,16 @@
 
 include("dbConnection.php");
 
-$id = $_POST['id'];
+$id = intval($_POST['id']);
 $username = $_POST['username'];
 $password = $_POST['pass'];
 $email = $_POST['email'];
-$accountStatus = $_POST['account_status'];
-$isDeleted = $_POST['is_deleted'];
+$accountStatus = intval($_POST['account_status']);
 
 
 
-$stmt = $conn->prepare("UPDATE articles SET username = ?, pass = ?, email = ?, account_status = ?, is_deleted = ? WHERE id = ?");
-$stmt->bind_param("sssi", $username, $password, $email, $accountStatus, $isDeleted, $id);
+$stmt = $conn->prepare("UPDATE accounts SET username = ?, pass = ?, email = ?, account_status = ? WHERE id = ?");
+$stmt->bind_param("sssii", $username, $password, $email, $accountStatus, $id);
 
 if ($stmt->execute() === FALSE) {
     echo "Error: " . $conn->error;

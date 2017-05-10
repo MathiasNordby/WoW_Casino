@@ -55,6 +55,11 @@ h2 {
     font-size: 25px;
 }
 
+#logout {
+    display:flex;
+    height: 250px;
+}
+
 .sidebar-nav ul {
     display: flex;
     align-items: center;

@@ -66,12 +66,12 @@ function readAccount() {
                 var row = "" +
                     "<tr>" +
                     "<td>" + accountArray[i].data.id + "</td>" +
-                    "<td>" + accountArray[i].data.username + "</td>" +
-                    "<td>" + accountArray[i].data.pass + "</td>" +
-                    "<td>" + accountArray[i].data.email + "</td>" +
-                    "<td>" + accountArray[i].data.account_status + "</td>" +
-                    '<td><button class="btn btn-danger" disabled>Delete</button></td>' +
-                    '<td><button class="btn btn-info" onclick="updateAccount(' + accountArray[i].data.id + ')">Update</button></td>' +
+                    "<td><input id='updateUsername' value=" + accountArray[i].data.username + " style='color:black' ></td>" +
+                    "<td><input id='updatePassword' value=" + accountArray[i].data.pass + " style='color:black' ></td>" +
+                    "<td><input id='updateEmail' value=" + accountArray[i].data.email + " style='color:black' ></td>" +
+                    "<td><input id='updateAccountStatus' value=" + accountArray[i].data.account_status + " style='color:black' ></td>" +
+                    '<td><button id="deletebtn" class="btn btn-danger" onclick="deleteAccount(' + accountArray[i].data.id + ')">Delete</button></td>' +
+                    '<td><button id="updatebtn" class="btn btn-info" onclick="updateAccount( ' + accountArray[i].data.id + ' )">Update</button></td>' +
                     "</tr>"
                 $("#updateAccount").append(row);
             }
@@ -100,8 +100,22 @@ function readAccount() {
 /*
     Update Account using AJAX reading the PHP that connects with MySQL-database
  */
-function updateAccount() {
+function updateData(rowID) {
 
+}
+
+
+function updateAccount(id) {
+        var username = $('#updateUsername').val();
+        var password = $('#updatePassword').val();
+        var email = $('#updateEmail').val();
+        var accountStatus = $('#updateAccountStatus').val();
+    if(confirm("Are you sure you want to save data to Account?"))
+        $.post("phpApi/updateAccount.php",
+            {id: id, username: username, pass: password, email: email, account_status: accountStatus}).done(function (data) {
+            alert("Account Updated with id: " + id + " " + username + " " + password + " " + email + " " + accountStatus);
+        });
+    location.reload();
 }
 
 function deleteAccount(id) {
