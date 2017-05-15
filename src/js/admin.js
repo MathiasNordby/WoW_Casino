@@ -110,7 +110,6 @@ function updateAccount(id) {
         var password = $('#updatePassword').val();
         var email = $('#updateEmail').val();
         var accountStatus = $('#updateAccountStatus').val();
-
     if(confirm("Are you sure you want to save data to Account?"))
         $.post("phpApi/updateAccount.php",
             {id: id, username: username, pass: password, email: email, account_status: accountStatus}).done(function (data) {
