@@ -19,14 +19,14 @@ function createAccount() {
     var password = $('#password').val();
     var email = $('#email').val();
     var accountStatus = $('#accountStatus').val();
-    if(username.length > 4 && password.length > 4 && email.length > 4) {
-        $.post("phpApi/createAccount.php",
+    if(username.length > 4 && password.length > 4 && email.length > 4 && accountStatus == 0 || accountStatus == 1) {
+        $.post("php/createAccount.php",
             { username: username, pass: password, email: email, account_status: accountStatus}).done(function(data) {
             alert ("Account Created");
             alert (accountStatus);
         });
     } else {
-        alert ("Username, Password and email must be atleast 5 chars each")
+        alert ("Username, Password and email must be atleast 5 chars each and valid AccountStatus")
     }
 }
 
@@ -35,7 +35,7 @@ function createAccount() {
  */
 //Read Account Table
 function readAccount() {
-        $.get("phpApi/accountAPI.php", function (data) {
+        $.get("php/accountAPI.php", function (data) {
             $("#readAccount").empty();
             var accountArray = JSON.parse(data);
             console.log(accountArray);
@@ -57,7 +57,7 @@ function readAccount() {
         });
 
 //Update Account Table
-        $.get("phpApi/accountAPI.php", function (data) {
+        $.get("php/accountAPI.php", function (data) {
             $("#updateAccount").empty();
             var accountArray = JSON.parse(data);
             console.log(accountArray);
@@ -66,19 +66,19 @@ function readAccount() {
                 var row = "" +
                     "<tr>" +
                     "<td>" + accountArray[i].data.id + "</td>" +
-                    "<td><input id='updateUsername' value=" + accountArray[i].data.username + " style='color:black' ></td>" +
-                    "<td><input id='updatePassword' value=" + accountArray[i].data.pass + " style='color:black' ></td>" +
-                    "<td><input id='updateEmail' value=" + accountArray[i].data.email + " style='color:black' ></td>" +
-                    "<td><input id='updateAccountStatus' value=" + accountArray[i].data.account_status + " style='color:black' ></td>" +
+                    "<td>" + accountArray[i].data.username + "</td>" +
+                    "<td>" + accountArray[i].data.pass + "</td>" +
+                    "<td>" + accountArray[i].data.email + "</td>" +
+                    "<td>" + accountArray[i].data.account_status + "</td>" +
                     '<td><button id="deletebtn" class="btn btn-danger" onclick="deleteAccount(' + accountArray[i].data.id + ')">Delete</button></td>' +
-                    '<td><button id="updatebtn" class="btn btn-info" onclick="updateAccount( ' + accountArray[i].data.id + ' )">Update</button></td>' +
+                    '<td><button id="updatebtn'+i+'" class="btn btn-info" onclick="getData('+i+')">Update</button></td>' +
                     "</tr>"
                 $("#updateAccount").append(row);
             }
         });
 
 //Deleted Account Table
-        $.get("phpApi/accountAPI_deleted.php", function (data) {
+        $.get("php/accountAPI_deleted.php", function (data) {
             $("#deleteAccount").empty();
             var accountArray = JSON.parse(data);
             console.log(accountArray);
@@ -100,10 +100,18 @@ function readAccount() {
 /*
     Update Account using AJAX reading the PHP that connects with MySQL-database
  */
-function updateData(rowID) {
 
+function getData(id) {
+    var button = $("#updatebtn" + id);
+    var password = button.parent().parent("tr").find("td:nth-child(3)").replaceWith(function () {
+        return '<input type="text" id="updatePassword" value="' + $(this).text() + '"> </input>';
+    });
+    var password = button.parent().parent("tr").find("td:nth-child(3)").replaceWith(function () {
+        return '<input type="text" id="updatePassword" value="' + $(this).text() + '"> </input>';
+    });
+    var cell3 = button.parent().parent("tr").find("td:nth-child(3)").text();
+    console.log("cell 2 : "+password+", cell 3 : "+cell3);
 }
-
 
 function updateAccount(id) {
         var username = $('#updateUsername').val();
@@ -111,7 +119,7 @@ function updateAccount(id) {
         var email = $('#updateEmail').val();
         var accountStatus = $('#updateAccountStatus').val();
     if(confirm("Are you sure you want to save data to Account?"))
-        $.post("phpApi/updateAccount.php",
+        $.post("php/updateAccount.php",
             {id: id, username: username, pass: password, email: email, account_status: accountStatus}).done(function (data) {
             alert("Account Updated with id: " + id + " " + username + " " + password + " " + email + " " + accountStatus);
         });
@@ -119,8 +127,8 @@ function updateAccount(id) {
 }
 
 function deleteAccount(id) {
-    if(confirm("Are you sure you want to delete Account?")) {
-        $.post("phpApi/deleteAccount.php", {id: id}).done(function(data) {
+    if(confirm("Are you sure you want to delete Account with id: " + id + "?")) {
+        $.post("php/deleteAccount.php", {id: id}).done(function(data) {
             alert("deleted account with id: " + id);
         });
     }
@@ -128,8 +136,8 @@ function deleteAccount(id) {
 }
 
 function undeleteAccount(id) {
-    if(confirm("Are you sure you want to restore Account?")) {
-        $.post("phpApi/restoreAccount.php", {id: id}).done(function(data) {
+    if(confirm("Are you sure you want to restore Account with id: " + id + "?")) {
+        $.post("php/restoreAccount.php", {id: id}).done(function(data) {
             alert("Account with id: " + id + " has been restored");
         });
     }
