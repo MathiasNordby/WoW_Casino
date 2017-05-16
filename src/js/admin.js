@@ -19,7 +19,7 @@ function createAccount() {
     var password = $('#password').val();
     var email = $('#email').val();
     var accountStatus = $('#accountStatus').val();
-    if(username.length > 4 && password.length > 4 && email.length > 4 && accountStatus == 0 || accountStatus == 1) {
+    if(username.length > 4 && password.length > 4 && email.length > 4 && accountStatus === 0 || accountStatus === 1) {
         $.post("php/createAccount.php",
             { username: username, pass: password, email: email, account_status: accountStatus}).done(function(data) {
             alert ("Account Created");
@@ -70,7 +70,7 @@ function readAccount() {
                     "<td>" + accountArray[i].data.pass + "</td>" +
                     "<td>" + accountArray[i].data.email + "</td>" +
                     "<td>" + accountArray[i].data.account_status + "</td>" +
-                    '<td><button id="deletebtn" class="btn btn-danger" onclick="deleteAccount(' + accountArray[i].data.id + ')">Delete</button></td>' +
+                    '<td><button class="btn btn-danger" disabled >Delete</button></td>' +
                     '<td><button id="updatebtn'+i+'" class="btn btn-info" onclick="getData('+i+')">Update</button></td>' +
                     "</tr>"
                 $("#updateAccount").append(row);
@@ -90,6 +90,7 @@ function readAccount() {
                     "<td>" + accountArray[i].data.username + "</td>" +
                     "<td>" + accountArray[i].data.pass + "</td>" +
                     "<td>" + accountArray[i].data.email + "</td>" +
+                    "<td>" + accountArray[i].data.account_status + "</td>" +
                     '<td><button class="btn btn-danger" onclick="undeleteAccount(' + accountArray[i].data.id + ')">Restore</button></td>' +
                     "</tr>"
                 $("#deleteAccount").append(row);
@@ -100,30 +101,53 @@ function readAccount() {
 /*
     Update Account using AJAX reading the PHP that connects with MySQL-database
  */
-
 function getData(id) {
     var button = $("#updatebtn" + id);
-    var password = button.parent().parent("tr").find("td:nth-child(3)").replaceWith(function () {
-        return '<input type="text" id="updatePassword" value="' + $(this).text() + '"> </input>';
+    var getUserId = button.parent().parent("tr").find("td:nth-child(1)").text();
+    var getAccount = button.parent().parent("tr").find("td:nth-child(2)").text();
+    var getPassword = button.parent().parent("tr").find("td:nth-child(3)").text();
+    var getEmail = button.parent().parent("tr").find("td:nth-child(4)").text();
+    var getAccountStatus = button.parent().parent("tr").find("td:nth-child(5)").text();
+
+    var row = button.parent().parent("tr").replaceWith(function () {
+                return row = "" +
+                    "<tr>" +
+                    "<td>" + getUserId + "</td>" +
+                    "<td>" + '<input type="text" id="updateUsername'+id+'" style="color:black" value="' + getAccount + '"> </input>' + "</td>" +
+                    "<td>" + '<input type="text" id="updatePassword'+id+'" style="color:black" value="' + getPassword + '"> </input>' + "</td>" +
+                    "<td>" + '<input type="text" id="updateEmail'+id+'" style="color:black" value="' + getEmail + '"> </input>' + "</td>" +
+                    "<td>" + '<input type="number" id="updateAccountStatus'+id+'" style="color:black" value="' + getAccountStatus + '"> </input>' + "</td>" +
+                    "<td>" + '<button id="deletebtn" class="btn btn-danger" onclick="deleteAccount(' + getUserId + ')">Delete</button>' + "</td>" +
+                    "<td>" + '<button id="savebtn'+id+'" class="btn btn-info" onclick="updateAccount(' + id +',' + getUserId + ')">Save</button>' + "</td>" +
+                    "</tr>";
     });
-    var password = button.parent().parent("tr").find("td:nth-child(3)").replaceWith(function () {
-        return '<input type="text" id="updatePassword" value="' + $(this).text() + '"> </input>';
-    });
-    var cell3 = button.parent().parent("tr").find("td:nth-child(3)").text();
-    console.log("cell 2 : "+password+", cell 3 : "+cell3);
 }
 
-function updateAccount(id) {
-        var username = $('#updateUsername').val();
-        var password = $('#updatePassword').val();
-        var email = $('#updateEmail').val();
-        var accountStatus = $('#updateAccountStatus').val();
+function updateAccount(rowID, id) {
+    var username = $('#updateUsername' + rowID).val();
+    var password = $('#updatePassword' + rowID).val();
+    var email = $('#updateEmail' + rowID).val();
+    var accountStatus = $('#updateAccountStatus' + rowID).val();
+
     if(confirm("Are you sure you want to save data to Account?"))
         $.post("php/updateAccount.php",
             {id: id, username: username, pass: password, email: email, account_status: accountStatus}).done(function (data) {
             alert("Account Updated with id: " + id + " " + username + " " + password + " " + email + " " + accountStatus);
         });
-    location.reload();
+
+    var button = $("#savebtn" + rowID);
+    var row = button.parent().parent("tr").replaceWith(function () {
+        return row = "" +
+            "<tr>" +
+            "<td>" + id + "</td>" +
+            "<td>" + username + "</td>" +
+            "<td>" + password + "</td>" +
+            "<td>" + email + "</td>" +
+            "<td>" + accountStatus + "</td>" +
+            "<td>" + '<button class="btn btn-danger" disabled>Delete</button>' + "</td>" +
+            "<td>" + '<button id="updatebtn'+rowID+'" class="btn btn-info" onclick="getData('+ rowID +')">Update</button>' + "</td>" +
+            "</tr>";
+    });
 }
 
 function deleteAccount(id) {
