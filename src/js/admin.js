@@ -12,15 +12,6 @@ $(document).ready(function() {
 });
 
 
-function adminLogin() {
-    var username = $('#accountNameInput').val();
-    var password = $('#passwordInput').val();
-
-    $.post("php/loginAdmin.php", {username: username, pass: password}).done(function(data) {
-
-    });
-}
-
 /*
     Create account using AJAX passing it to Database
  */
@@ -58,7 +49,7 @@ function readAccount() {
                     "<tr>" +
                     "<td>" + accountArray[i].data.id + "</td>" +
                     "<td>" + accountArray[i].data.username + "</td>" +
-                    "<td>" + accountArray[i].data.pass + "</td>" +
+                    "<td>" + accountArray[i].data.pass.toString().substring(0, 6) + " ...</td>" +
                     "<td>" + accountArray[i].data.email + "</td>" +
                     "<td>" + accountArray[i].data.balance + "</td>" +
                     "<td>" + accountArray[i].data.location + "</td>" +
@@ -80,7 +71,7 @@ function readAccount() {
                     "<tr>" +
                     "<td>" + accountArray[i].data.id + "</td>" +
                     "<td>" + accountArray[i].data.username + "</td>" +
-                    "<td>" + accountArray[i].data.pass + "</td>" +
+                    "<td>" + accountArray[i].data.pass.toString().substring(0, 6) + " ...</td>" +
                     "<td>" + accountArray[i].data.email + "</td>" +
                     "<td>" + accountArray[i].data.account_status + "</td>" +
                     '<td><button class="btn btn-danger" disabled >Delete</button></td>' +
@@ -101,7 +92,7 @@ function readAccount() {
                     "<tr>" +
                     "<td>" + accountArray[i].data.id + "</td>" +
                     "<td>" + accountArray[i].data.username + "</td>" +
-                    "<td>" + accountArray[i].data.pass + "</td>" +
+                    "<td>" + accountArray[i].data.pass.toString().substring(0, 6) + " ...</td>" +
                     "<td>" + accountArray[i].data.email + "</td>" +
                     "<td>" + accountArray[i].data.account_status + "</td>" +
                     '<td><button class="btn btn-danger" onclick="undeleteAccount(' + accountArray[i].data.id + ')">Restore</button></td>' +

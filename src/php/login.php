@@ -10,18 +10,11 @@ include("../../includes/dbConnection.php");
 
 $username = $_POST['username'] ;
 $password = $_POST['pass'];
-$salt = "JyhakrLrjeyaA";
+$salt = "s4lt";
 
-//SQL-injection Security
-$username = stripcslashes($username);
-$password = stripcslashes($password);
+$password_hashed = hash("sha512", $password . $salt);
 
-$username = mysqli_real_escape_string($conn, $username);
-$password = mysqli_real_escape_string($conn, $password);
-
-$password_hashed = hash("sha512", $password);
-
-$sql = "SELECT * FROM accounts WHERE username = '$username' and pass = '$password'";
+$sql = "SELECT * FROM accounts WHERE username = '$username' and pass = '$password_hashed'";
 $result = mysqli_query($conn, $sql) or die("Failed to query database");
 $row = mysqli_fetch_array($result);
 if ($row['username'] == $username && $username !== "" && $row['pass'] == $password && $password !== "") {

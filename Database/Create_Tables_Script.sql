@@ -30,6 +30,7 @@ PRIMARY KEY (id)
 
 /* to prevent Brute Force */
 CREATE TABLE login_attempts (
-user_id INT(11) NOT NULL,
-time VARCHAR(30) NOT NULL
-)
+username VARCHAR(255) NOT NULL UNIQUE,
+time VARCHAR(30) NOT NULL,
+PRIMARY KEY (username)
+);

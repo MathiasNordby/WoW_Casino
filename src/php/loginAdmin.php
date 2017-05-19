@@ -8,25 +8,33 @@
 
 include("../../includes/dbConnection.php");
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 $username = $_POST['username'] ;
 $password = $_POST['pass'];
-$salt = "JyhakrLrjeyaA";
+$salt = "s4lt";
+$passwordHashed = hash('sha512', $password . $salt);
 
 // Using prepared statements means that SQL injection is not possible.
-    $sql = "SELECT * FROM accounts WHERE username = ? AND pass = ? AND account_status = 1 AND is_deleted = 0";
+    $sql = "SELECT id FROM accounts WHERE username = ? AND pass = ? AND account_status = 1 AND is_deleted = 0";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ss", $username, $password);
+    $stmt->bind_param("ss", $username, $passwordHashed);
     $stmt->execute();
     $stmt->store_result();
-
-$password = hash('sha512', $password . $salt);
 
 if ($stmt->num_rows == 1) {
     echo "Succesfully logged in as " . $username;
     header('Location: ../admin.html');
     exit;
 } else {
-    echo "Log in failed!";
-    header('Location: ../adminLogin.html');
+    // Password is not correct
+    // We record this attempt in the database
+    $now = time();
+    // get variables from result.
+    $sql = "INSERT INTO login_attempts(username, time) VALUES ('$username', '$now')";
+    echo $username;
+    $conn->query($sql);
+    //header('Location: ../adminLogin.html');
     exit;
 }
