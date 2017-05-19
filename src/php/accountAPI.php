@@ -6,10 +6,9 @@
  * Time: 17:45
  */
 
-include("dbConnection.php");
+include("../../includes/dbConnection.php");
 
-//SELECT * ACCOUNTS
-//Prepare SQL statement for execution
+// Using prepared statements means that SQL injection is not possible.
 $sql = "SELECT * FROM accounts WHERE is_deleted = 0";
 $stmt = $conn->prepare($sql);
 
@@ -22,7 +21,7 @@ if($stmt->execute() === TRUE) {
 
         while ($row[$i] = $result -> fetch_assoc()) {
             $row_array['data'] = $row[$i++];
-            //Each time there's added data from $row array it pushes the array into the final $array to amke it dynamic.
+            //Each time there's added data from $row array it pushes the array into the final $array to make it dynamic.
             array_push($array,$row_array);
         }
     } else {

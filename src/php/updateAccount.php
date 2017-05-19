@@ -6,7 +6,7 @@
  * Time: 00:26
  */
 
-include("dbConnection.php");
+include("../../includes/dbConnection.php");
 
 $id = intval($_POST['id']);
 $username = $_POST['username'];
@@ -15,8 +15,8 @@ $email = $_POST['email'];
 $accountStatus = intval($_POST['account_status']);
 
 
-
-$stmt = $conn->prepare("UPDATE accounts SET username = ?, pass = ?, email = ?, account_status = ? WHERE id = ?");
+$sql = "UPDATE accounts SET username = ?, pass = ?, email = ?, account_status = ? WHERE id = ?";
+$stmt = $conn->prepare($sql);
 $stmt->bind_param("sssii", $username, $password, $email, $accountStatus, $id);
 
 if ($stmt->execute() === FALSE) {

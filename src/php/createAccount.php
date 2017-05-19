@@ -6,7 +6,7 @@
  * Time: 19:08
  */
 
-include("dbConnection.php");
+include("../../includes/dbConnection.php");
 
 
 $username = $_POST['username'] ;
@@ -15,17 +15,11 @@ $email = $_POST['email'];
 $accountStatus = intval($_POST['account_status']);
 
 //CREATE ACCOUNT FROM ADMIN
+    $sql = "UPDATE accounts SET username = ?, pass = ?, email = ?, account_status = ? WHERE id = ?";
 //Prepare SQL statement for execution
-    $stmt = $conn->prepare("INSERT INTO accounts (username, pass, email, account_status) VALUES (?,?,?,?)");
+    $stmt = $conn->prepare($sql);
 //Binds the variables to a prepared statement as parameters ("sss" | s = string | d = double | i = integer | b = blob, send in packets
     $stmt->bind_param("sssi", $username, $password, $email, $accountStatus);
-
-//SQL-injection Security
-    $username = stripcslashes($username);
-    $password = stripcslashes($password);
-
-    $username = mysqli_real_escape_string($conn, $username);
-    $password = mysqli_real_escape_string($conn, $password);
 
     //$hash(sha512) + lav egen salt
 

@@ -11,6 +11,16 @@ $(document).ready(function() {
     readAccount();
 });
 
+
+function adminLogin() {
+    var username = $('#accountNameInput').val();
+    var password = $('#passwordInput').val();
+
+    $.post("php/loginAdmin.php", {username: username, pass: password}).done(function(data) {
+
+    });
+}
+
 /*
     Create account using AJAX passing it to Database
  */
@@ -18,12 +28,15 @@ function createAccount() {
     var username = $('#username').val();
     var password = $('#password').val();
     var email = $('#email').val();
-    var accountStatus = $('#accountStatus').val();
+    var accountStatus = parseInt($('#accountStatus').val());
     if(username.length > 4 && password.length > 4 && email.length > 4 && accountStatus === 0 || accountStatus === 1) {
         $.post("php/createAccount.php",
             { username: username, pass: password, email: email, account_status: accountStatus}).done(function(data) {
             alert ("Account Created");
-            alert (accountStatus);
+            $('#username').val("");
+            $('#password').val("");
+            $('#email').val("");
+            $('#accountStatus').val("");
         });
     } else {
         alert ("Username, Password and email must be atleast 5 chars each and valid AccountStatus")

@@ -6,7 +6,7 @@
  * Time: 21:52
  */
 
-include("dbConnection.php");
+include("../../includes/dbConnection.php");
 
 $username = $_POST['username'] ;
 $password = $_POST['pass'];

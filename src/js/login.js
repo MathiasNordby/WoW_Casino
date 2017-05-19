@@ -19,9 +19,9 @@ function create() {
 
     //create div through JS == particle and set random values + controlling the size/speed through CSS .particle
     var $particle = $('<div class="particle" />'),
-        x = randomMinMax(-200, 200),
-        y = randomMinMax(-200, 50),
-        z = randomMinMax(-200, 200),
+        x = randomMinMax(-75, 75),
+        y = randomMinMax(-75, 75),
+        z = randomMinMax(-75, 75),
         tilt = randomMinMax(0, 360); //Sets how the particle shall tilt
 
         //Set the color of each particle

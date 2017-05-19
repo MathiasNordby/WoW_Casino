@@ -20,7 +20,7 @@
             <h1>Administrator</h1>
             <h2>Sign in to get administrator privileges</h2>
             <div class="line-separator"></div>
-            <form action="php/login.php" method="POST">
+            <form action="php/loginAdmin.php" method="POST">
                 <h4>Account name:</h4>
                 <input class="form-control input-lg" id="accountNameInput" name="username" type="text" placeholder="Account Name">
                 <br>
@@ -29,7 +29,7 @@
                 <br>
                 <br>
                 <div class="col-md-12 text-center">
-                    <button id="logInButton" type="submit" value="admin.html" class="btn btn-success btn-md">Log in</button>
+                    <button id="logInButton" type="submit" value="admin.html" class="btn btn-success btn-md" onclick="adminLogin()">Log in</button>
                 </div>
             </form>
         </div>

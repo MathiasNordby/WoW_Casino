@@ -6,7 +6,7 @@
  * Time: 00:44
  */
 
-include("dbConnection.php");
+include("../../includes/dbConnection.php");
 
 //SELECT * ACCOUNTS
 //Prepare SQL statement for execution

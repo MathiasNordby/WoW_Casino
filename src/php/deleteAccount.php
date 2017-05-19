@@ -6,7 +6,7 @@
  * Time: 15:26
  */
 
-include("dbConnection.php");
+include("../../includes/dbConnection.php");
 
 $id = $_POST['id'];
 
