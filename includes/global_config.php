@@ -14,6 +14,15 @@
 
 /**
  * These are the database login details
+ *
+define("HOST", "localhost"); 			// The host you want to connect to.
+define("USER", "admin"); 			// The database username.
+define("PASSWORD", "warragontracos90"); 	// The database password.
+define("DATABASE", "wowcasino");             // The database name.
+*/
+
+/**
+ * These are the database login details
  */
 define("HOST", "localhost"); 			// The host you want to connect to. 
 define("USER", "root"); 			// The database username.
