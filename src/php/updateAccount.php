@@ -13,8 +13,8 @@ $username = $_POST['username'];
 $password = $_POST['pass'];
 $email = $_POST['email'];
 $accountStatus = intval($_POST['account_status']);
-$salt = "s4lt";
-$passwordHashed = hash('sha512', $password . $salt);
+
+$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
 
 $sql = "UPDATE accounts SET username = ?, pass = ?, email = ?, account_status = ? WHERE id = ?";

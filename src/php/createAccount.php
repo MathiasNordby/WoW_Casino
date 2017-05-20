@@ -13,7 +13,14 @@ $username = $_POST['username'] ;
 $password = $_POST['pass'];
 $email = $_POST['email'];
 $accountStatus = intval($_POST['account_status']);
-$salt = "s4lt";
+
+/*Hashed Password with CRYPT_BLOWFISH(Stongest algorithm supported by PHP)
+ * and default adds a random salt to the Password
+ * and cost =  length of hash = Longer length generate time, increase by 1 doubles the generate time
+ * but it also increase the time for the time it takes to break the password
+ * Default cost = 10
+ */
+$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
 //CREATE ACCOUNT FROM ADMIN
     $sql = "INSERT INTO accounts (username, pass, email, account_status) VALUES (?,?,?,?)";
@@ -21,16 +28,8 @@ $salt = "s4lt";
     $stmt = $conn->prepare($sql);
 //Binds the variables to a prepared statement as parameters ("sss" | s = string | d = double | i = integer | b = blob, send in packets
 
-    $passwordHashed = hash('sha512', $password . $salt);
-
-    $stmt->bind_param("sssi", $username, $passwordHashed, $email, $accountStatus);
-
-
-    if($stmt->execute() > 0 && $username !== "" && $passwordHashed !== "" && $email !== "" && $accountStatus === 0 || 1) {
-        echo "Account succesfully created through admin privileges! ";
-    } else {
-        echo "Error on creating account through admin privileges! ";
-    }
+    $stmt->bind_param("sssi", $username, $hashedPassword, $email, $accountStatus);
+    $stmt->execute();
 
     $stmt->close();
     $conn->close();

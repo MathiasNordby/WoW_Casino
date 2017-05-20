@@ -63,7 +63,7 @@ create();
 var box=$("#scene");
 //Set the center of the box in a list
 var boxCenter=[box.offset().left+box.width()/2, box.offset().top+box.height()/2];
-
+/*
 $(document).mousemove(function(e){
     //Math.atan2 makes a coordinate: x,y(Mouse Cursor) and the Emitter inside Scene goes to that Coordinate
     var coordination = Math.atan2(e.pageX-boxCenter[0],- (e.pageY- boxCenter[1]) )*(180/Math.PI);
@@ -73,6 +73,7 @@ $(document).mousemove(function(e){
     box.css({ 'transform': 'rotate(' + coordination + 'deg)'});
 
 });
+*/
 
 
 

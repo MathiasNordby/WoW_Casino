@@ -10,19 +10,26 @@ include("../../includes/dbConnection.php");
 
 $username = $_POST['username'] ;
 $password = $_POST['pass'];
-$salt = "s4lt";
 
-$password_hashed = hash("sha512", $password . $salt);
+// Using prepared statements means that SQL injection is not possible.
+$sql = "SELECT id, pass FROM accounts WHERE username = ? AND is_deleted = 0";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $username);
+$stmt->execute();
+$stmt->bind_result($id, $hashedPassword);
 
-$sql = "SELECT * FROM accounts WHERE username = '$username' and pass = '$password_hashed'";
-$result = mysqli_query($conn, $sql) or die("Failed to query database");
-$row = mysqli_fetch_array($result);
-if ($row['username'] == $username && $username !== "" && $row['pass'] == $password && $password !== "") {
-    echo "Succesfully logged in as " . $row['username'];
-    header('Location: ../wowcasino.html');
-    exit;
-} else {
-    echo "Log in failed!";
-    header('Location: ../index.html');
-    exit;
+while ($stmt->fetch()) {
+    if (password_verify($password, $hashedPassword)) {
+        header('Location: ../wowcasino.html');
+        exit;
+    }  else {
+        // Password is not correct
+        // We record this attempt in the database
+        $now = time();
+        // get variables from result.
+        $sql = "INSERT INTO login_attempts(username, time) VALUES ('$username', '$now')";
+        $conn->query($sql);
+        header('Location: ../index.html');
+        exit;
+    }
 }
