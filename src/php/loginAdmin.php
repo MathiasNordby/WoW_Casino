@@ -8,7 +8,7 @@
 
 include("../../includes/dbConnection.php");
 
-$username = $_POST['username'] ;
+$username = $_POST['username'];
 $password = $_POST['pass'];
 
 // Using prepared statements means that SQL injection is not possible.
@@ -32,5 +32,5 @@ $now = time();
 // get variables from result.
 $sql = "INSERT INTO login_attempts(username, time) VALUES ('$username', '$now')";
 $conn->query($sql);
-header('Location: ../index.html');
+header('Location: ../adminLogin.html');
 exit;

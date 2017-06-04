@@ -8,7 +8,7 @@
 
 include("../../includes/dbConnection.php");
 
-$username = $_POST['username'] ;
+$username = $_POST['username'];
 $password = $_POST['pass'];
 
 // Using prepared statements means that SQL injection is not possible.
