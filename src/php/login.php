@@ -24,11 +24,3 @@ while ($stmt->fetch()) {
         exit;
     }
 }
-// Password is not correct
-// We record this attempt in the database
-$now = time();
-// get variables from result.
-$sql = "INSERT INTO login_attempts(username, time) VALUES ('$username', '$now')";
-$conn->query($sql);
-header('Location: ../index.html');
-exit;

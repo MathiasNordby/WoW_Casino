@@ -18,19 +18,15 @@ $password = $_POST['pass'];
     $stmt->execute();
     $stmt->bind_result($id, $hashedPassword);
 
-while ($stmt->fetch()) {
-    //Verify if the given hash matches the password
-    if (password_verify($password, $hashedPassword)) {
-        echo "Succesfully logged in as " . $username;
-        header('Location: ../admin.html');
-        exit;
-    }
-}
-// Password is not correct
-// We record this attempt in the database
-$now = time();
-// get variables from result.
-$sql = "INSERT INTO login_attempts(username, time) VALUES ('$username', '$now')";
-$conn->query($sql);
+        while ($stmt->fetch()) {
+                //Verify if the given hash matches the password
+                if (password_verify($password, $hashedPassword)) {
+                    echo "Succesfully logged in as " . $username;
+                    header('Location: ../admin.html');
+                    exit;
+                }
+        }
+
+include("secure_bruteForce.php");
 header('Location: ../adminLogin.html');
 exit;
