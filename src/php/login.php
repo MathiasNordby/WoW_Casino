@@ -24,3 +24,7 @@ while ($stmt->fetch()) {
         exit;
     }
 }
+
+include("secure_bruteForce.php");
+header('Location: ../index.html');
+exit;
